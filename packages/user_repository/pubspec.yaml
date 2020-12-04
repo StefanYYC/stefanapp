@@ -1,0 +1,11 @@
+name: user_repository
+description: Gère l'utilisateur
+version: 1.0.0
+
+environment:
+  sdk: ">=2.1.0 <3.0.0"
+
+dependencies:
+  equatable: ^1.2.0
+  meta: ^1.1.8
+  uuid: ^2.2.2
