@@ -44,8 +44,8 @@ class _UsernameInput extends StatelessWidget {
           onChanged: (username) =>
               context.read<LoginBloc>().add(LoginUsernameChanged(username)),
           decoration: InputDecoration(
-            labelText: 'username',
-            errorText: state.username.invalid ? 'invalid username' : null,
+            labelText: "Nom d'utilisateur",
+            errorText: state.username.invalid ? "Nom non valide" : null,
           ),
         );
       },
@@ -65,8 +65,8 @@ class _PasswordInput extends StatelessWidget {
               context.read<LoginBloc>().add(LoginPasswordChanged(password)),
           obscureText: true,
           decoration: InputDecoration(
-            labelText: 'password',
-            errorText: state.password.invalid ? 'invalid password' : null,
+            labelText: 'Mot de passe',
+            errorText: state.password.invalid ? 'Mot de passe non valide' : null,
           ),
         );
       },
@@ -84,7 +84,7 @@ class _LoginButton extends StatelessWidget {
             ? const CircularProgressIndicator()
             : RaisedButton(
                 key: const Key('loginForm_continue_raisedButton'),
-                child: const Text('Login'),
+                child: const Text('Se connecter'),
                 onPressed: state.status.isValidated
                     ? () {
                         context.read<LoginBloc>().add(const LoginSubmitted());
