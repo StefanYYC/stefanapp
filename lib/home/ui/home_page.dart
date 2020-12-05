@@ -34,6 +34,7 @@ class HomePage extends StatelessWidget {
                 return Text('UserID: ${user.username}');
               },
             ),
+            Hero(tag: 'imageBird', child: Image.asset("assets/img/bird.png")),
           ],
         ),
       ),

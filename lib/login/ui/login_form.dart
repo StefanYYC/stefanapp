@@ -12,7 +12,11 @@ class LoginForm extends StatelessWidget {
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(
-              const SnackBar(content: Text('Authentication Failure')),
+              const SnackBar(
+                content: Text("L'authentification a échoué.",
+                    style: TextStyle(color: Colors.black)),
+                backgroundColor: Colors.deepOrange,
+              ),
             );
         }
       },
@@ -66,7 +70,8 @@ class _PasswordInput extends StatelessWidget {
           obscureText: true,
           decoration: InputDecoration(
             labelText: 'Mot de passe',
-            errorText: state.password.invalid ? 'Mot de passe non valide' : null,
+            errorText:
+                state.password.invalid ? 'Mot de passe non valide' : null,
           ),
         );
       },

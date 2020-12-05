@@ -12,9 +12,12 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Connexion'), centerTitle: true,),
+      appBar: AppBar(
+        title: const Text('Connexion'),
+        centerTitle: true,
+      ),
       body: Padding(
-        padding: const EdgeInsets.all(12),
+        padding: const EdgeInsets.fromLTRB(30, 0, 30, 200),
         child: BlocProvider(
           create: (context) {
             return LoginBloc(
@@ -22,7 +25,13 @@ class LoginPage extends StatelessWidget {
                   RepositoryProvider.of<AuthenticationRepository>(context),
             );
           },
-          child: LoginForm(),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Hero(tag: 'imageBird', child: Image.asset("assets/img/bird.png")),
+              LoginForm(),
+            ],
+          ),
         ),
       ),
     );
