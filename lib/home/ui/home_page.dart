@@ -25,18 +25,12 @@ class HomePage extends StatelessWidget {
           )
         ],
       ),
-      body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Builder(
-              builder: (context) {
-                return Text('UserID: ${user.username}');
-              },
-            ),
-            Hero(tag: 'imageBird', child: Image.asset("assets/img/bird.png")),
-          ],
-        ),
+      body: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          Hero(tag: 'imageBird', child: Image.asset("assets/img/bird.png")),
+        ],
       ),
     );
   }
