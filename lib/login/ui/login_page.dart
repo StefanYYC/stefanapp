@@ -28,7 +28,7 @@ class LoginPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              HeroAnimation(),
+              LogoClipped(),
               LoginForm(),
             ],
           ),
@@ -56,15 +56,13 @@ class TriangleClipper extends CustomClipper<Path> {
 
 // Animation "Hero" -> visible sur le changement de LoginPage à HomePage
 
-class HeroAnimation extends StatelessWidget {
-  const HeroAnimation({Key key}) : super(key: key);
+class LogoClipped extends StatelessWidget {
+  const LogoClipped({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Hero(
-        tag: 'imageBird',
-        child: ClipPath(
-            clipper: TriangleClipper(),
-            child: Image.asset("assets/img/bird.png")));
+    return ClipPath(
+        clipper: TriangleClipper(),
+        child: Image.asset("assets/img/bird.png"));
   }
 }
