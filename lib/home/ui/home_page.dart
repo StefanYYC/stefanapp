@@ -29,7 +29,7 @@ class HomePage extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          Hero(tag: 'imageBird', child: Image.asset("assets/img/bird.png")),
+          Image.asset("assets/img/bird.png"),
         ],
       ),
     );
