@@ -8,7 +8,7 @@ class ApiClient {
   Dio dio = Dio();
 
   Future<List<Users>> fetchUsers(int limit) async {
-    final response = await dio.get("https://randomuser.me/api/?results=5");
+    final response = await dio.get("https://randomuser.me/api/?results=$limit");
 
     if (response.statusCode == 200) {
       try {
