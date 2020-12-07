@@ -23,12 +23,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     if (event is HomeFetched) {
       try {
         if (currentState is HomeInitial) {
-          final users = await _apiClient.fetchUsers(5);
+          final users = await _apiClient.fetchUsers();
           yield HomeSuccess(users: users);
           return;
         }
         if (currentState is HomeSuccess) {
-          final users = await _apiClient.fetchUsers(5);
+          final users = await _apiClient.fetchUsers();
           yield users.isEmpty
               ? currentState.copyWith()
               : HomeSuccess(users: currentState.users + users);

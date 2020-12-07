@@ -7,22 +7,26 @@ class ApiClient {
   Response response;
   Dio dio = Dio();
 
-  Future<List<Users>> fetchUsers(int limit) async {
-    final response = await dio.get("https://randomuser.me/api/?results=$limit");
+  Future<List<Users>> fetchUsers() async {
+    // Custom API
+    final response = await dio
+        .get("https://my-json-server.typicode.com/stefanyyc/demo/users");
 
     if (response.statusCode == 200) {
       try {
         final body = json.decode(response.data) as Map;
-        final data = body['results'] as List;
+        final data = body['users'] as List;
         return data.map((rawUser) {
+          // Fill in user model with data from API
           return Users(
-            firstName: rawUser['name']['first'],
-            lastName: rawUser['name']['last'],
-            city: rawUser['location']['city'],
-            country: rawUser['location']['country'],
-            postalCode: rawUser['location']['postcode'],
+            id: rawUser['id'],
+            firstName: rawUser['firstname'],
+            lastName: rawUser['lastname'],
+            city: rawUser['city'],
+            country: "France",
+            postalCode: rawUser['postal'],
             email: rawUser['email'],
-            picture: rawUser['picture']['large'],
+            picture: rawUser['image'],
           );
         }).toList();
       } catch (_) {
@@ -30,6 +34,27 @@ class ApiClient {
       }
     } else {
       throw Exception('Erreur lors du chargement des résultats');
+    }
+  }
+
+  Future<Users> fetchUsersDetail(int id) async {
+    final response = await dio
+        .get("https://my-json-server.typicode.com/stefanyyc/demo/users?id=$id");
+
+    if (response.statusCode == 200) {
+      try {
+        final body = json.decode(response.data) as Map;
+        final data = body['users'];
+        return data.map((rawUser) {
+          return Users(
+            description: rawUser['description'],
+          );
+        }).toList();
+      } catch (_) {
+        throw Exception();
+      }
+    } else {
+      throw Exception("Impossible de récupérer les détails.");
     }
   }
 }
