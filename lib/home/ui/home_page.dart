@@ -71,18 +71,13 @@ class _ListUsersState extends State<ListUsers> {
           );
         }
       }
-      return GridView.builder(
+      return ListView.builder(
         itemBuilder: (BuildContext context, int index) {
           return index >= state.users.length
               ? BottomLoader()
               : UserWidget(user: state.users[index]);
         },
         itemCount: 5,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          crossAxisSpacing: 2.0,
-          mainAxisSpacing: 2.0,
-        ),
       );
     });
   }
@@ -122,11 +117,14 @@ class UserWidget extends StatelessWidget {
         firstName: user.firstName,
         lastName: user.lastName,
       )),
-      leading: Text('${user.email}'),
+      leading: CircleAvatar(
+        backgroundImage: NetworkImage(user.picture),
+      ),
       title: Text('${user.lastName} ${user.firstName}'),
       isThreeLine: true,
       dense: true,
       subtitle: Text('${user.city}, ${user.country}'),
+      trailing: Icon(Icons.keyboard_arrow_right),
     );
   }
 }
