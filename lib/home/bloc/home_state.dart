@@ -14,9 +14,10 @@ class HomeLoading extends HomeState {}
 class HomeFailure extends HomeState {}
 
 class HomeSuccess extends HomeState {
+
   final List<Users> users;
 
-  HomeSuccess({this.users});
+  const HomeSuccess({this.users});
 
   HomeSuccess copyWith({
     List<Users> users,

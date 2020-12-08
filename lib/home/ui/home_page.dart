@@ -53,7 +53,7 @@ class _ListUsersState extends State<ListUsers> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder(builder: (context, state) {
+    return BlocBuilder<HomeBloc, HomeState>(builder: (context, state) {
       if (state is HomeInitial) {
         return Center(
           child: CircularProgressIndicator(),
@@ -70,15 +70,16 @@ class _ListUsersState extends State<ListUsers> {
             child: Text('Aucun utilisateur à afficher'),
           );
         }
+        return ListView.builder(
+          itemBuilder: (BuildContext context, int index) {
+            return index >= state.users.length
+                ? BottomLoader()
+                : UserWidget(user: state.users[index]);
+          },
+          itemCount: 5,
+        );
       }
-      return ListView.builder(
-        itemBuilder: (BuildContext context, int index) {
-          return index >= state.users.length
-              ? BottomLoader()
-              : UserWidget(user: state.users[index]);
-        },
-        itemCount: 5,
-      );
+      return Container();
     });
   }
 }
