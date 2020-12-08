@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:stefanapp/api/api_client.dart';
 import 'package:stefanapp/authentication/authentication.dart';
 import 'package:stefanapp/home/bloc/home.dart';
 import 'package:stefanapp/models/generated_users/users.dart';
+import 'package:stefanapp/user_details_page/user_details_page.dart';
 
 class HomePage extends StatelessWidget {
   static Route route() {
@@ -27,12 +29,9 @@ class HomePage extends StatelessWidget {
           )
         ],
       ),
-      body: Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
-          Image.asset("assets/img/bird.png"),
-        ],
+      body: BlocProvider(
+        create: (context) => HomeBloc(ApiClient())..add(HomeFetched()),
+        child: ListUsers(),
       ),
     );
   }
@@ -73,14 +72,38 @@ class _ListUsersState extends State<ListUsers> {
         }
       }
       return GridView.builder(
+        itemBuilder: (BuildContext context, int index) {
+          return index >= state.users.length
+              ? BottomLoader()
+              : UserWidget(user: state.users[index]);
+        },
+        itemCount: 5,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           crossAxisSpacing: 2.0,
           mainAxisSpacing: 2.0,
         ),
-        itemBuilder: (BuildContext context, int index) {},
       );
     });
+  }
+}
+
+class BottomLoader extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      alignment: Alignment.center,
+      child: Center(
+        child: SizedBox(
+          width: 33,
+          height: 33,
+          child: CircularProgressIndicator(
+            strokeWidth: 1.5,
+            backgroundColor: Colors.orange,
+          ),
+        ),
+      ),
+    );
   }
 }
 
@@ -90,9 +113,15 @@ class UserWidget extends StatelessWidget {
   const UserWidget({Key key, @required this.user}) : super(key: key);
 
   @override
-  Widget build(BuildContext contextn) {
+  Widget build(BuildContext context) {
     return ListTile(
-      onTap: () => {},
+      onTap: () => Navigator.of(context).push(UserDetailsPage.route(
+        id: user.id,
+        city: user.city,
+        country: user.country,
+        firstName: user.firstName,
+        lastName: user.lastName,
+      )),
       leading: Text('${user.email}'),
       title: Text('${user.lastName} ${user.firstName}'),
       isThreeLine: true,
