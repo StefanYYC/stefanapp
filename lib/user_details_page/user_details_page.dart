@@ -41,7 +41,7 @@ class UserDetailsPage extends StatelessWidget {
       backgroundColor: Colors.white,
       body: BlocProvider(
         create: (context) => UserDetailsPageBloc(ApiClient())
-          ..add(UserDetailsPageFetched (
+          ..add(UserDetailsPageFetched(
               id: this.id,
               city: this.city,
               country: this.country,
@@ -53,14 +53,43 @@ class UserDetailsPage extends StatelessWidget {
   }
 }
 
-class DetailsUser extends StatelessWidget {
+class DetailsUser extends StatefulWidget {
+  @override
+  _DetailsUserState createState() => _DetailsUserState();
+}
+
+class _DetailsUserState extends State<DetailsUser> {
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<UserDetailsPageBloc, UserDetailsPageState>(
+      builder: (context, state) {
+        if (state is UserDetailsPageLoading) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+        if (state is UserDetailsPageFailure) {
+          return Center(
+            child: Text('Impossible d\'afficher les détails'),
+          );
+        }
+        if (state is UserDetailsPageSuccess) {
+          return ContentUserDetails(user: state.user);
+        }
+        return Container();
+      },
+    );
+  }
+}
+
+class ContentUserDetails extends StatelessWidget {
   final Users user;
-  const DetailsUser({Key key, this.user}) : super(key: key);
+  const ContentUserDetails({Key key, this.user}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text("${user.firstName}"),
+    return Container(
+      child: Text(user.firstName),
     );
   }
 }
