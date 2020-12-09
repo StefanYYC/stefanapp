@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stefanapp/api/api_client.dart';
@@ -12,6 +13,7 @@ class UserDetailsPage extends StatelessWidget {
   final int id;
   final String description;
   final String image;
+  final String email;
 
   const UserDetailsPage({
     Key key,
@@ -22,10 +24,11 @@ class UserDetailsPage extends StatelessWidget {
     @required this.city,
     @required this.description,
     @required this.image,
+    @required this.email,
   }) : super(key: key);
 
   static Route route(
-      {id, firstName, lastName, country, city, image, description}) {
+      {id, firstName, lastName, country, city, image, description, email}) {
     return MaterialPageRoute(
         builder: (_) => UserDetailsPage(
               id: id,
@@ -35,6 +38,7 @@ class UserDetailsPage extends StatelessWidget {
               lastName: lastName,
               image: image,
               description: description,
+              email: email,
             ));
   }
 
@@ -58,25 +62,86 @@ class UserDetailsPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Center(
-                child: Hero(
-                    tag: 'avatar_' + id.toString(),
-                    child: CircleAvatar(
-                      backgroundImage: NetworkImage(image),
-                      minRadius: 100,
-                    )),
+              SizedBox(
+                height: 15,
               ),
-              Card(
-                elevation: 5,
-                shadowColor: Colors.grey,
-                child: Column(children: [
-                  Text("$firstName $lastName habite en $country dans la ville de $city."),
-                  Text("")
-                ],),
-              )
+              animationImage(),
+              SizedBox(
+                height: 15,
+              ),
+              cardWidget()
             ],
           ),
         ));
+  }
+
+  Widget animationImage() {
+    return Center(
+        child: Hero(
+      tag: 'avatar_' + id.toString(),
+      child: ClipRRect(
+          borderRadius: BorderRadius.circular(300),
+          child: Image(image: NetworkImage(image))),
+    ));
+  }
+
+  Widget cardWidget() {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Stack(
+        children: [
+          Card(
+            elevation: 8,
+            shadowColor: Colors.grey,
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 15,
+                ),
+                RichText(
+                  text: TextSpan(
+                      text: "$firstName $lastName ",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16.0,
+                          color: Colors.blueAccent),
+                      children: <TextSpan>[
+                        TextSpan(
+                            text: "habite en $country dans la ville de $city.")
+                      ]),
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                Text(
+                  '" $description "',
+                  style: TextStyle(
+                    color: Colors.blueAccent,
+                    fontStyle: FontStyle.italic,
+                    fontWeight: FontWeight.w400,
+                    fontSize: 14.0,
+                  ),
+                ),
+                emailWidget(),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget emailWidget() {
+    return Align(
+      alignment: Alignment.centerRight,
+      child: Padding(
+        padding: const EdgeInsets.only(right: 10.0, top: 25.0, bottom: 15.0),
+        child: Text(
+          email,
+          style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),
+        ),
+      ),
+    );
   }
 }
 

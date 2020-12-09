@@ -28,39 +28,12 @@ class LoginPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              LogoClipped(),
+              Image.asset("assets/img/bird.png"),
               LoginForm(),
             ],
           ),
         ),
       ),
     );
-  }
-}
-
-// Transforme l'image en triangle
-class TriangleClipper extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    final path = Path();
-    path.moveTo(size.width / 2, 0.0);
-    path.lineTo(size.width, size.height);
-    path.lineTo(0.0, size.height);
-    path.close();
-    return path;
-  }
-
-  @override
-  bool shouldReclip(TriangleClipper oldClipper) => false;
-}
-
-class LogoClipped extends StatelessWidget {
-  const LogoClipped({Key key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return ClipPath(
-        clipper: TriangleClipper(),
-        child: Image.asset("assets/img/bird.png"));
   }
 }

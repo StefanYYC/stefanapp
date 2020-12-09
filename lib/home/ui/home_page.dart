@@ -18,7 +18,7 @@ class HomePage extends StatelessWidget {
     );
     return Scaffold(
       appBar: AppBar(
-        title: Text('Bienvenue ${user.username}'),
+        title: Text('Bienvenue ${user.id}'),
         centerTitle: true,
         actions: <Widget>[
           IconButton(
@@ -119,6 +119,7 @@ class UserWidget extends StatelessWidget {
         lastName: user.lastName,
         description: user.description,
         image: user.picture,
+        email: user.email,
       )),
       leading: Hero(
         tag: 'avatar_' + user.id.toString(),

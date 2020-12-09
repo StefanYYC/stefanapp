@@ -87,14 +87,24 @@ class _LoginButton extends StatelessWidget {
       builder: (context, state) {
         return state.status.isSubmissionInProgress
             ? const CircularProgressIndicator()
-            : RaisedButton(
-                key: const Key('loginForm_continue_raisedButton'),
-                child: const Text('Se connecter'),
-                onPressed: state.status.isValidated
-                    ? () {
-                        context.read<LoginBloc>().add(const LoginSubmitted());
-                      }
-                    : null,
+            : ButtonTheme(
+                buttonColor: Colors.blueAccent,
+                padding: EdgeInsets.all(15),
+                child: RaisedButton(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18.0),
+                      side: BorderSide(color: Colors.lightBlueAccent)),
+                  key: const Key('loginForm_continue_raisedButton'),
+                  child: Text(
+                    'Se connecter'.toUpperCase(),
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: state.status.isValidated
+                      ? () {
+                          context.read<LoginBloc>().add(const LoginSubmitted());
+                        }
+                      : null,
+                ),
               );
       },
     );
