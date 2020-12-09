@@ -13,8 +13,10 @@ class UserDetailsPageFetched extends UserDetailsPageEvent {
   final String firstName;
   final String lastName;
   final String country;
+  final String description;
+  final String image;
 
-  UserDetailsPageFetched({this.city, this.firstName, this.lastName, this.country, this.id});
+  UserDetailsPageFetched({this.city, this.firstName, this.lastName, this.country, this.id, this.description, this.image});
   @override
-  List<Object> get props => [id, city, firstName, lastName, country];
+  List<Object> get props => [id, city, firstName, lastName, country, description, image];
 }

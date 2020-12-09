@@ -25,6 +25,7 @@ class ApiClient {
             postalCode: rawUser['postal'] as String,
             email: rawUser['email'] as String,
             picture: rawUser['image'] as String,
+            description: rawUser['description'] as String,
           );
         }).toList();
         // stack donne la ligne où l'erreur apparaît
@@ -38,6 +39,7 @@ class ApiClient {
   }
 
   Future<Users> fetchUsersDetail(int id) async {
+    print(id);
     final response = await dio
         .get("https://my-json-server.typicode.com/stefanyyc/demo/users?id=$id");
 

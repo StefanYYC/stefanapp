@@ -10,6 +10,8 @@ class UserDetailsPage extends StatelessWidget {
   final String country;
   final String city;
   final int id;
+  final String description;
+  final String image;
 
   const UserDetailsPage({
     Key key,
@@ -18,9 +20,12 @@ class UserDetailsPage extends StatelessWidget {
     @required this.lastName,
     @required this.country,
     @required this.city,
+    @required this.description,
+    @required this.image,
   }) : super(key: key);
 
-  static Route route({id, firstName, lastName, country, city}) {
+  static Route route(
+      {id, firstName, lastName, country, city, image, description}) {
     return MaterialPageRoute(
         builder: (_) => UserDetailsPage(
               id: id,
@@ -28,6 +33,8 @@ class UserDetailsPage extends StatelessWidget {
               city: city,
               country: country,
               lastName: lastName,
+              image: image,
+              description: description,
             ));
   }
 
@@ -46,7 +53,9 @@ class UserDetailsPage extends StatelessWidget {
               city: this.city,
               country: this.country,
               firstName: this.firstName,
-              lastName: this.lastName)),
+              lastName: this.lastName,
+              image: this.image,
+              description: this.description)),
         child: DetailsUser(),
       ),
     );
@@ -84,6 +93,7 @@ class _DetailsUserState extends State<DetailsUser> {
 
 class ContentUserDetails extends StatelessWidget {
   final Users user;
+
   const ContentUserDetails({Key key, this.user}) : super(key: key);
 
   @override

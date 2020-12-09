@@ -34,7 +34,7 @@ class UserDetailsPageBloc
               ? null
               : UserDetailsPageSuccess(user: currentState.user);
         }
-      } catch (_) {
+      } catch (_, stack) {
         throw Exception();
       }
     }
