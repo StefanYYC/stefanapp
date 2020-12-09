@@ -118,7 +118,7 @@ class UserWidget extends StatelessWidget {
         firstName: user.firstName,
         lastName: user.lastName,
         description: user.description,
-        image: user.image,
+        image: user.picture,
       )),
       leading: CircleAvatar(
         backgroundImage: NetworkImage(user.picture),

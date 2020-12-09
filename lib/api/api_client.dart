@@ -39,14 +39,23 @@ class ApiClient {
   }
 
   Future<Users> fetchUsersDetail(int id) async {
-    print(id);
+    print("id: $id");
     final response = await dio
         .get("https://my-json-server.typicode.com/stefanyyc/demo/users?id=$id");
 
     if (response.statusCode == 200) {
+      print("inside response");
       try {
         return response.data.map<Users>((rawUser) {
           return Users(
+            id: rawUser['id'] as int,
+            firstName: rawUser['firstname'] as String,
+            lastName: rawUser['lastname'] as String,
+            city: rawUser['city'] as String,
+            country: "France",
+            postalCode: rawUser['postal'] as String,
+            email: rawUser['email'] as String,
+            picture: rawUser['image'] as String,
             description: rawUser['description'] as String,
           );
         }).toList();

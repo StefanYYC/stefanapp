@@ -10,6 +10,12 @@ part 'user_details_page_state.dart';
 
 class UserDetailsPageBloc
     extends Bloc<UserDetailsPageEvent, UserDetailsPageState> {
+  @override
+  void onError(Object error, StackTrace stackTrace) {
+    print(error);
+    super.onError(error, stackTrace);
+  }
+
   UserDetailsPageBloc(ApiClient apiClient)
       : assert(apiClient != null),
         _apiClient = apiClient,
@@ -25,7 +31,9 @@ class UserDetailsPageBloc
     if (event is UserDetailsPageFetched) {
       try {
         if (currentState is UserDetailsPageInitial) {
+          print("event id: ${event.id}");
           final userDetails = await _apiClient.fetchUsersDetail(event.id);
+          print(userDetails);
           yield UserDetailsPageSuccess(user: userDetails);
         }
         if (currentState is UserDetailsPageSuccess) {
