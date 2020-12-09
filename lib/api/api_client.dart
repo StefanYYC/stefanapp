@@ -14,22 +14,21 @@ class ApiClient {
 
     if (response.statusCode == 200) {
       try {
-        final body = json.decode(response.data) as Map;
-        final data = body['users'] as List;
-        return data.map((rawUser) {
+        return response.data.map((rawUser) {
           // Fill in user model with data from API
           return Users(
-            id: rawUser['id'],
-            firstName: rawUser['firstname'],
-            lastName: rawUser['lastname'],
-            city: rawUser['city'],
+            id: rawUser['id'] as int,
+            firstName: rawUser['firstname'] as String,
+            lastName: rawUser['lastname'] as String,
+            city: rawUser['city'] as String,
             country: "France",
-            postalCode: rawUser['postal'],
-            email: rawUser['email'],
-            picture: rawUser['image'],
+            postalCode: rawUser['postal'] as String,
+            email: rawUser['email'] as String,
+            picture: rawUser['image'] as String,
           );
-        }).toList();
-      } catch (_) {
+        }).toList() as List<Users>;
+      } catch (_, stack) {
+        print(_);
         throw Exception();
       }
     } else {
