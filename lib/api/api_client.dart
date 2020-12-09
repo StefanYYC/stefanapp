@@ -14,7 +14,7 @@ class ApiClient {
 
     if (response.statusCode == 200) {
       try {
-        return response.data.map((rawUser) {
+        return response.data.map<Users>((rawUser) {
           // Fill in user model with data from API
           return Users(
             id: rawUser['id'] as int,
@@ -26,7 +26,8 @@ class ApiClient {
             email: rawUser['email'] as String,
             picture: rawUser['image'] as String,
           );
-        }).toList() as List<Users>;
+        }).toList();
+        // stack donne la ligne où l'erreur apparaît
       } catch (_, stack) {
         print(_);
         throw Exception();
@@ -42,11 +43,9 @@ class ApiClient {
 
     if (response.statusCode == 200) {
       try {
-        final body = json.decode(response.data) as Map;
-        final data = body['users'];
-        return data.map((rawUser) {
+        return response.data.map<Users>((rawUser) {
           return Users(
-            description: rawUser['description'],
+            description: rawUser['description'] as String,
           );
         }).toList();
       } catch (_) {
