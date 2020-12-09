@@ -41,28 +41,33 @@ class UserDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text('$firstName'),
-      ),
-      backgroundColor: Colors.white,
-      body: BlocProvider(
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text('$firstName'),
+        ),
+        backgroundColor: Colors.white,
+        body:
+            /* BlocProvider(
         create: (context) => UserDetailsPageBloc(ApiClient())
           ..add(UserDetailsPageFetched(
-              id: this.id,
-              city: this.city,
-              country: this.country,
-              firstName: this.firstName,
-              lastName: this.lastName,
-              image: this.image,
-              description: this.description)),
+              id: this.id,)),
         child: DetailsUser(),
-      ),
-    );
+      ),*/
+            Column(
+          children: [
+            Center(
+              child: Hero(
+                  tag: 'avatar_' + id.toString(),
+                  child: CircleAvatar(
+                    backgroundImage: NetworkImage(image),
+                  )),
+            )
+          ],
+        ));
   }
 }
 
-class DetailsUser extends StatefulWidget {
+/* class DetailsUser extends StatefulWidget {
   @override
   _DetailsUserState createState() => _DetailsUserState();
 }
@@ -103,3 +108,4 @@ class ContentUserDetails extends StatelessWidget {
     );
   }
 }
+ */

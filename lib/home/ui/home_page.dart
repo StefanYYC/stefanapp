@@ -120,10 +120,13 @@ class UserWidget extends StatelessWidget {
         description: user.description,
         image: user.picture,
       )),
-      leading: CircleAvatar(
-        backgroundImage: NetworkImage(user.picture),
+      leading: Hero(
+        tag: 'avatar_' + user.id.toString(),
+        child: CircleAvatar(
+          backgroundImage: NetworkImage(user.picture),
+        ),
       ),
-      title: Text('${user.lastName} ${user.firstName}'),
+      title: Text('${user.firstName} ${user.lastName}'),
       isThreeLine: true,
       dense: true,
       subtitle: Text('${user.city}, ${user.country}'),

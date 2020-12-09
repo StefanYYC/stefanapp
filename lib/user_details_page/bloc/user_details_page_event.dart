@@ -9,14 +9,8 @@ abstract class UserDetailsPageEvent extends Equatable {
 
 class UserDetailsPageFetched extends UserDetailsPageEvent {
   final int id;
-  final String city;
-  final String firstName;
-  final String lastName;
-  final String country;
-  final String description;
-  final String image;
 
-  UserDetailsPageFetched({this.city, this.firstName, this.lastName, this.country, this.id, this.description, this.image});
+  UserDetailsPageFetched({this.id});
   @override
-  List<Object> get props => [id, city, firstName, lastName, country, description, image];
+  List<Object> get props => [id];
 }
