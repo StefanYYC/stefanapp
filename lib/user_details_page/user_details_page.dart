@@ -53,16 +53,29 @@ class UserDetailsPage extends StatelessWidget {
               id: this.id,)),
         child: DetailsUser(),
       ),*/
-            Column(
-          children: [
-            Center(
-              child: Hero(
-                  tag: 'avatar_' + id.toString(),
-                  child: CircleAvatar(
-                    backgroundImage: NetworkImage(image),
-                  )),
-            )
-          ],
+            Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Center(
+                child: Hero(
+                    tag: 'avatar_' + id.toString(),
+                    child: CircleAvatar(
+                      backgroundImage: NetworkImage(image),
+                      minRadius: 100,
+                    )),
+              ),
+              Card(
+                elevation: 5,
+                shadowColor: Colors.grey,
+                child: Column(children: [
+                  Text("$firstName $lastName habite en $country dans la ville de $city."),
+                  Text("")
+                ],),
+              )
+            ],
+          ),
         ));
   }
 }

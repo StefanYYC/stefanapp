@@ -54,8 +54,6 @@ class TriangleClipper extends CustomClipper<Path> {
   bool shouldReclip(TriangleClipper oldClipper) => false;
 }
 
-// Animation "Hero" -> visible sur le changement de LoginPage à HomePage
-
 class LogoClipped extends StatelessWidget {
   const LogoClipped({Key key}) : super(key: key);
 
