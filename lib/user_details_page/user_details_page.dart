@@ -72,7 +72,8 @@ class UserDetailsPage extends StatelessWidget {
               cardWidget()
             ],
           ),
-        ));
+        )
+        );
   }
 
   Widget animationImage() {
@@ -144,8 +145,7 @@ class UserDetailsPage extends StatelessWidget {
     );
   }
 }
-
-/* class DetailsUser extends StatefulWidget {
+class DetailsUser extends StatefulWidget {
   @override
   _DetailsUserState createState() => _DetailsUserState();
 }
@@ -186,4 +186,4 @@ class ContentUserDetails extends StatelessWidget {
     );
   }
 }
- */
+
