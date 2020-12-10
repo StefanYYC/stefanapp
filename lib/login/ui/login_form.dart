@@ -20,18 +20,22 @@ class LoginForm extends StatelessWidget {
             );
         }
       },
-      child: Align(
-        alignment: const Alignment(0, -1 / 3),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            _UsernameInput(),
-            const Padding(padding: EdgeInsets.all(12)),
-            _PasswordInput(),
-            const Padding(padding: EdgeInsets.all(12)),
-            _LoginButton(),
-          ],
-        ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Image.asset(
+            "assets/img/bird.png",
+            height: 200,
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          _UsernameInput(),
+          const Padding(padding: EdgeInsets.all(12)),
+          _PasswordInput(),
+          const Padding(padding: EdgeInsets.all(12)),
+          _LoginButton(),
+        ],
       ),
     );
   }
@@ -89,8 +93,8 @@ class _LoginButton extends StatelessWidget {
             ? const CircularProgressIndicator()
             : ButtonTheme(
                 buttonColor: Colors.blueAccent,
-                padding: EdgeInsets.all(15),
                 child: RaisedButton(
+                  padding: EdgeInsets.all(25),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(18.0),
                       side: BorderSide(color: Colors.lightBlueAccent)),

@@ -54,9 +54,10 @@ class UserDetailsPage extends StatelessWidget {
             /* BlocProvider(
         create: (context) => UserDetailsPageBloc(ApiClient())
           ..add(UserDetailsPageFetched(
-              id: this.id,)),
+            id: this.id,
+          )),
         child: DetailsUser(),
-      ),*/
+      ), */
             Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
@@ -72,8 +73,7 @@ class UserDetailsPage extends StatelessWidget {
               cardWidget()
             ],
           ),
-        )
-        );
+        ));
   }
 
   Widget animationImage() {
@@ -145,6 +145,7 @@ class UserDetailsPage extends StatelessWidget {
     );
   }
 }
+
 class DetailsUser extends StatefulWidget {
   @override
   _DetailsUserState createState() => _DetailsUserState();
@@ -186,4 +187,3 @@ class ContentUserDetails extends StatelessWidget {
     );
   }
 }
-

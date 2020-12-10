@@ -28,7 +28,6 @@ class LoginPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset("assets/img/bird.png"),
               LoginForm(),
             ],
           ),
